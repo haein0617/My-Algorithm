@@ -4,12 +4,11 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 
-		int N = sc.nextInt();
+		sc.nextInt();
 		String a = sc.next();
-		int[] b=new int[a.length()];
 		int sum = 0;
 		for(int i = 0;i<a.length();i++) {
-			sum += a.charAt(i)-48;
+			sum += a.charAt(i)-'0';
 		}
 		System.out.println(sum);
 		
