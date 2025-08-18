@@ -2,30 +2,33 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class Solution {
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
 		int n = Integer.parseInt(br.readLine());
-		
+		String[] game= new String[n+1];
 		for (int i = 1; i <= n; i++) {
-			String num = String.valueOf(i);
-			int count = 0;
-			for (int j = 0; j < num.length() ; j++) {
-				char ch = num.charAt(j); // 글자 수 만큼 반복해서.
-				if(ch == '3' || ch=='6'||ch=='9') {
-					count++;
+			game[i] = String.valueOf(i);
+		}
+		for (int i = 1; i <= n; i++) {
+			if(game[i].contains("3") || game[i].contains("6") ||game[i].contains("9")) {
+				int count = 0;
+				for (int j = 0; j < game[i].length(); j++) {
+					if(game[i].charAt(j)=='3' || game[i].charAt(j)=='6' || game[i].charAt(j)=='9') {
+						count++;
+					}
 				}
-			}
-			if(count>0) { //박수 쳐야하면 몇 번인지?
-				for (int j = 0; j <count; j++) {
+				for (int j = 0; j < count; j++) {
 					sb.append('-');
 				}
-			}
-			else { // 박수 칠 필요 없으면
-				sb.append(num);
+				
+			}else {
+				sb.append(game[i]);
 			}
 			sb.append(" ");
 		}
-		System.out.println(sb.toString());
+		
+		System.out.println(sb);
+		
 	}
 }
