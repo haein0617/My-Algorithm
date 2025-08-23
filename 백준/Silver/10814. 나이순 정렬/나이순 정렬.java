@@ -1,28 +1,47 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.StringTokenizer;
 
 public class Main {
 	public static void main(String[] args) throws Exception{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		List<person> members = new ArrayList<>();
+		
 		int n = Integer.parseInt(br.readLine());
-		String[][] members = new String[n][2];
 		for (int i = 0; i < n; i++) {
 			StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-			members[i][0] = st.nextToken();//나이
-			members[i][1] = st.nextToken();//이름
+			int age = Integer.parseInt(st.nextToken());
+			String name = st.nextToken();
+			
+			members.add(new person(age,name));
 		}
-		
-		Arrays.sort(members, (a1,a2)->{
-			return Integer.parseInt(a1[0])- Integer.parseInt(a2[0]);
-		});
-		
+		Collections.sort(members);
 		
 		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < n; i++) {
-			sb.append(members[i][0]).append(" ").append(members[i][1]).append("\n");
+		for (person member : members) {
+			sb.append(member.age).append(" ").append(member.name).append("\n");
 		}
-		System.out.println(sb);
+		
+		System.out.print(sb.toString());
 	}
+}
+
+class person implements Comparable<person>{
+	int age;
+	String name;
+	
+	
+	public person(int age, String name) {
+		this.age = age;
+		this.name = name;
+	}
+	
+	public int compareTo(person other) {
+		return this.age-other.age;
+	}
+	
+	
 }
