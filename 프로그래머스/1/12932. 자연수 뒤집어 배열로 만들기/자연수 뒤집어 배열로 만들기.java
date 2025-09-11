@@ -1,7 +1,7 @@
 import java.util.*;
 
 class Solution {
-    public long[] solution(long n) {
+    public int[] solution(long n) {
         
         int cnt = 0;
         List<Long> a = new ArrayList<>();
@@ -11,9 +11,9 @@ class Solution {
             cnt++;
         }
         
-        long[] answer = new long[cnt];
+        int[] answer = new int[cnt];
         for(int i = 0; i < cnt;i++){
-            answer[i] = a.get(i);
+            answer[i] = a.get(i).intValue();
         }
         return answer;
     }
