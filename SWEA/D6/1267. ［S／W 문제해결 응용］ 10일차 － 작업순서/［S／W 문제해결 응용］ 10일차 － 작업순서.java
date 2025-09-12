@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
@@ -14,7 +16,10 @@ public class Solution {
 			int v = Integer.parseInt(st.nextToken()); // 정점의 수 (3 <= v <= 1000)
 			int e = Integer.parseInt(st.nextToken()); // 간선의 수 (2 <= e <= 3000)
 			
-			int[][] graph = new int[v+1][v+1]; // 인접행렬
+			 List<Integer>[] adjList = new ArrayList[v + 1];
+	            for (int i = 0; i <= v; i++) {
+	                adjList[i] = new ArrayList<>(); // 각 리스트 초기화
+	            }
 			int[] inDegree = new int[v+1]; //진입차수 저장 배열 ( 선행 과제 수 )
 			
 			st = new StringTokenizer(br.readLine(), " ");
@@ -22,7 +27,7 @@ public class Solution {
 				int in = Integer.parseInt(st.nextToken());
 				int out = Integer.parseInt(st.nextToken());
 				
-				graph[in][out] = 1;
+				 adjList[in].add(out);
 				inDegree[out]++;
 			}// 입력 완료
 			
@@ -38,15 +43,11 @@ public class Solution {
 				int cur = q.poll();
 				sb.append(cur).append(" ");
 				
-				for (int to = 1; to < v+1 ; to++) {
+				for (int to : adjList[cur]) {
+					inDegree[to]--;
 					
-					if(graph[cur][to]==1) {
-						inDegree[to]--;
-						graph[cur][to] = 0;
-						
-						if(inDegree[to] == 0) {
-							q.offer(to);
-						}
+					if(inDegree[to] == 0) {
+						q.offer(to);
 					}
 				}
 			}
