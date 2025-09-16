@@ -15,7 +15,7 @@ public class Main {
 			arr[i] = Integer.parseInt(br.readLine());
 		}
 		
-		Arrays.parallelSort(arr);
+		Arrays.sort(arr);
 		for (int i = 0; i < arr.length; i++) {
 			sb.append(arr[i]).append("\n");
 		}
